@@ -35,11 +35,10 @@ public class ControllerServlet extends HttpServlet {
 		PrintWriter output = response.getWriter();
 
 		String title = request.getParameter("title");
-
 		String author = request.getParameter("author");
 
 		output.println("Book Title = " + title);
-		output.println("Book Title = " + author);
+		output.println("Book Author = " + author);
 	}
 
 	/**
@@ -48,7 +47,8 @@ public class ControllerServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	
+			
 		doGet(request, response);
 	}
 
