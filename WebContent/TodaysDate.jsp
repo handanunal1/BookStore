@@ -10,11 +10,15 @@
 <body>
 
 	<%
-		java.util.Date today = new java.util.Date();
-		String message = "Today's date is " + today.toString();
-	%>
+java.util.Date today = new java.util.Date();
+String message = "Today's date is "+ today.toString();
 
-	<%=message%>
+%>
+
+	<%=
+message
+
+%>
 
 </body>
 </html>
