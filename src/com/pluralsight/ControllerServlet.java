@@ -35,8 +35,11 @@ public class ControllerServlet extends HttpServlet {
 		PrintWriter output = response.getWriter();
 
 		String title = request.getParameter("title");
-		output.println("Book Title = " + title);
 
+		String author = request.getParameter("author");
+
+		output.println("Book Title = " + title);
+		output.println("Book Title = " + author);
 	}
 
 	/**
