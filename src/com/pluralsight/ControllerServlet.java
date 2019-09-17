@@ -1,7 +1,7 @@
 package com.pluralsight;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,12 +18,16 @@ import javax.servlet.http.HttpServletResponse;
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	private ArrayList<String> bookTitles = new ArrayList<String>();
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public ControllerServlet() {
 		super();
-		// TODO Auto-generated constructor stub
+		bookTitles.add("Lord of the Flies");
+		bookTitles.add("A Tale of Two Servers");
+		bookTitles.add("To Catch a Throw");
+		
 	}
 
 	/**
