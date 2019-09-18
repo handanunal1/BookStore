@@ -39,7 +39,7 @@ public class ControllerServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		
-		request.setAttribute("book_title", "1984");
+		request.setAttribute("book_titles", bookTitles);
 		RequestDispatcher dispatcher = request
 				.getRequestDispatcher("/BookList.jsp");
 		dispatcher.forward(request, response);
