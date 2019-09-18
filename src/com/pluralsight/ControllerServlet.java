@@ -18,15 +18,15 @@ import javax.servlet.http.HttpServletResponse;
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private ArrayList<String> bookTitles = new ArrayList<String>();
+	private ArrayList<Book> bookList = new ArrayList<Book>();
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public ControllerServlet() {
 		super();
-		bookTitles.add("Lord of the Flies");
-		bookTitles.add("A Tale of Two Servers");
-		bookTitles.add("To Catch a Throw");
+		bookList.add(new Book("To Kill a Mockingbird","Harper lee",5.50f));
+		bookList.add(new Book("1984","George Orwell",4.5f));
+		bookList.add(new Book("Frankestain","Mary Shelly",4.00f));
 		
 	}
 
@@ -39,7 +39,7 @@ public class ControllerServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		
-		request.setAttribute("book_titles", bookTitles);
+		request.setAttribute("book_list", bookList);
 		RequestDispatcher dispatcher = request
 				.getRequestDispatcher("/BookList.jsp");
 		dispatcher.forward(request, response);

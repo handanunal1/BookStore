@@ -9,7 +9,7 @@
 </head>
 <body>
 
-	<c:forEach items="${book_titles}" var="item">
+	<c:forEach items="${book_list}" var="item">
 		<p>Book: ${item}</p>
 	</c:forEach>
 
