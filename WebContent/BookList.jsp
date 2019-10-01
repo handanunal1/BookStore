@@ -8,6 +8,27 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class = "container">
+<div class = "links">
+<h1><a href ="list">Book Store</a></h1>
+<h2><a href = "new">Add New Book </a></h2>
+</div>
+<form name ="book_form" method = "post" action="insert">
+<caption><h2>New Book Form</h2>
+<p><label>Title: </label>
+<input type = "text" name="booktitle"/>
+</p>
+
+</caption>
+
+
+</form>
+
+
+</div>
+
+
+
 
 	<c:forEach items="${book_list}" var="item">
 		<p>Book: ${item}</p>
