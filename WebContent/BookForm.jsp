@@ -18,7 +18,7 @@
 <p><label>Title: </label>
 <input type ="text" name ="booktitle"/></p>
 <p><label>Author: </label>
-<input type ="text" name ="bookkauthor"/></p>
+<input type ="text" name ="bookauthor"/></p>
 <p><label>Price: </label>
 <input type ="text" name ="bookprice"/></p>
 <p><input type ="submit" value="Submit"></p>

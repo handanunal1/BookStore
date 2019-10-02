@@ -19,15 +19,16 @@ public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private ArrayList<Book> bookList = new ArrayList<Book>();
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public ControllerServlet() {
 		super();
-		bookList.add(new Book("To Kill a Mockingbird","Harper lee",5.50f));
-		bookList.add(new Book("1984","George Orwell",4.5f));
-		bookList.add(new Book("Frankestain","Mary Shelly",4.00f));
-		
+		bookList.add(new Book("To Kill a Mockingbird", "Harper lee", 5.50f));
+		bookList.add(new Book("1984", "George Orwell", 4.5f));
+		bookList.add(new Book("Frankestain", "Mary Shelly", 4.00f));
+
 	}
 
 	/**
@@ -38,15 +39,14 @@ public class ControllerServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		
 		String action = request.getPathInfo();
-		if(action.equals("/new")) {
-		addBook(request,response);
-			
+		if (action.equals("/new")) {
+			addBook(request, response);
+
 		}
-		
+
 		else {
-			listBooks(request,response);
+			listBooks(request, response);
 		}
 	}
 
@@ -57,9 +57,10 @@ public class ControllerServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	private void addBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void addBook(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/BookForm.jsp");
-		dispatcher.forward(request, response);	
+		dispatcher.forward(request, response);
 	}
 
 	/**
@@ -68,9 +69,22 @@ public class ControllerServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	
-			
-		doGet(request, response);
+
+		String action = request.getPathInfo();
+		if (action.equals("/insert")) {
+			insertBook(request, response);
+
+		}
 	}
 
+	private void insertBook(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String title = request.getParameter("booktitle");
+		String author = request.getParameter("bookauthor");
+		String price = request.getParameter("bookprice");
+		
+		Book newBook = new Book(title,author,Float.parseFloat(price));
+		bookList.add(newBook);
+		
+		response.sendRedirect("list");
+	}
 }
