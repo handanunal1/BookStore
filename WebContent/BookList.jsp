@@ -18,21 +18,11 @@
 <p><label>Title: </label>
 <input type = "text" name="booktitle"/>
 </p>
-
 </caption>
-
-
 </form>
-
-
 </div>
-
-
-
-
 	<c:forEach items="${book_list}" var="item">
 		<p>Book: ${item}</p>
 	</c:forEach>
-
 </body>
 </html>
