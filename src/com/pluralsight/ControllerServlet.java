@@ -1,6 +1,7 @@
 package com.pluralsight;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -19,12 +20,18 @@ public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private ArrayList<Book> bookList = new ArrayList<Book>();
+	private BookDAO bookDAO;
 
 	/**
+	 * @throws SQLException 
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ControllerServlet() {
+	public ControllerServlet() throws SQLException {
 		super();
+		
+		bookDAO = new BookDAO();
+		bookDAO.connect();
+		bookDAO.disconnect();
 		bookList.add(new Book("To Kill a Mockingbird", "Harper lee", 5.50f));
 		bookList.add(new Book("1984", "George Orwell", 4.5f));
 		bookList.add(new Book("Frankestain", "Mary Shelly", 4.00f));
