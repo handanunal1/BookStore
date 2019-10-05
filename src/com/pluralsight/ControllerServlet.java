@@ -32,9 +32,12 @@ public class ControllerServlet extends HttpServlet {
 		bookDAO = new BookDAO();
 		bookDAO.connect();
 		bookDAO.disconnect();
-		bookList.add(new Book("To Kill a Mockingbird", "Harper lee", 5.50f));
-		bookList.add(new Book("1984", "George Orwell", 4.5f));
-		bookList.add(new Book("Frankestain", "Mary Shelly", 4.00f));
+		
+	
+
+//		bookList.add(new Book("To Kill a Mockingbird", "Harper lee", 5.50f));
+//		bookList.add(new Book("1984", "George Orwell", 4.5f));
+//		bookList.add(new Book("Frankestain", "Mary Shelly", 4.00f));
 
 	}
 
@@ -59,9 +62,19 @@ public class ControllerServlet extends HttpServlet {
 
 	private void listBooks(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setAttribute("book_list", bookList);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/BookList.jsp");
-		dispatcher.forward(request, response);
+		
+		try {
+			ArrayList<Book> books = bookDAO.listAllBooks();
+			request.setAttribute("book_list", books);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/BookList.jsp");
+			dispatcher.forward(request, response);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	
 	}
 
 	private void addBook(HttpServletRequest request, HttpServletResponse response)

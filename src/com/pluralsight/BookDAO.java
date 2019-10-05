@@ -2,7 +2,10 @@ package com.pluralsight;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 public class BookDAO {
 
 	
@@ -20,7 +23,8 @@ public class BookDAO {
     public Connection connect() throws SQLException {
         if (jdbcConnection == null || jdbcConnection.isClosed()) {
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                
             } catch (ClassNotFoundException e) {
                 throw new SQLException(e);
             }
@@ -34,5 +38,25 @@ public class BookDAO {
         if (jdbcConnection != null && !jdbcConnection.isClosed()) {
         	jdbcConnection.close();
         }
+    }
+    
+    
+    
+    public ArrayList<Book> listAllBooks() throws SQLException{
+    	connect();
+    	ArrayList<Book> listBook = new ArrayList<>();
+    	Statement statement = jdbcConnection.createStatement();
+    	ResultSet resultSet = statement.executeQuery("SELECT * FROM book");
+    	while(resultSet.next()) {
+    		String title = resultSet.getString("title");
+    		String author = resultSet.getString("author");
+    		float price = resultSet.getFloat("price");
+    		Book book = new Book(title,author,price);
+    		listBook.add(book);
+    	}
+    	
+        resultSet.close();
+        statement.close();
+    	return listBook;
     }
 }
