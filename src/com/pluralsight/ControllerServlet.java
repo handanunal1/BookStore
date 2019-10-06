@@ -23,17 +23,15 @@ public class ControllerServlet extends HttpServlet {
 	private BookDAO bookDAO;
 
 	/**
-	 * @throws SQLException 
+	 * @throws SQLException
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public ControllerServlet() throws SQLException {
 		super();
-		
+
 		bookDAO = new BookDAO();
 		bookDAO.connect();
 		bookDAO.disconnect();
-		
-	
 
 //		bookList.add(new Book("To Kill a Mockingbird", "Harper lee", 5.50f));
 //		bookList.add(new Book("1984", "George Orwell", 4.5f));
@@ -62,7 +60,7 @@ public class ControllerServlet extends HttpServlet {
 
 	private void listBooks(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		try {
 			ArrayList<Book> books = bookDAO.listAllBooks();
 			request.setAttribute("book_list", books);
@@ -72,9 +70,7 @@ public class ControllerServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-	
+
 	}
 
 	private void addBook(HttpServletRequest request, HttpServletResponse response)
@@ -92,19 +88,26 @@ public class ControllerServlet extends HttpServlet {
 
 		String action = request.getPathInfo();
 		if (action.equals("/insert")) {
-			insertBook(request, response);
+			try {
+				insertBook(request, response);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		}
 	}
 
-	private void insertBook(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void insertBook(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
 		String title = request.getParameter("booktitle");
 		String author = request.getParameter("bookauthor");
 		String price = request.getParameter("bookprice");
-		
-		Book newBook = new Book(title,author,Float.parseFloat(price));
-		bookList.add(newBook);
-		
+
+		Book newBook = new Book(title, author, Float.parseFloat(price));
+		// bookList.add(newBook);
+
+		bookDAO.insertBook(newBook);
+
 		response.sendRedirect("list");
 	}
 }
